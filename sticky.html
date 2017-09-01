@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>测试</title>
+    <meta name="description" content="">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <link rel="stylesheet" type="text/css" href="">
+    <style type="text/css">
+        * {
+            padding: 0px;
+            margin: 0px;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            /* ios上按住后去掉上面浮层*/
+            -webkit-font-smoothing: antialiased;
+            /*chrome、safari 文本抗锯齿，字体平滑*/
+            -moz-osx-font-smoothing: grayscale;
+            /*firefox*/
+        }
+        
+        body {
+            background-color: #eee;
+            font-size: 15px;
+            font-family: 'PingFangSC-Regular', 'Helvetica Neue', 'Hiragino Sans GB', "Microsoft YaHei", Helvetica, "宋体", sans-serif;
+        }
+        
+        .section {
+            position: relative;
+            margin-bottom: .2rem;
+            background-color: #fff;
+            padding-left: .3rem;
+        }
+        
+        .state {
+            border-bottom: 1px solid #eee;
+            height: .66rem;
+            font-size: 13px;
+            padding-right: .3rem;
+        }
+        
+        .info {
+            color: #FFBE38;
+        }
+        
+        .info.waring {
+            color: #FF3B30;
+        }
+        
+        .detail {
+            position: relative;
+            padding-right: .3rem;
+            color: #999999;
+        }
+        
+        .content {
+            height: 1.5rem;
+            padding-right: .3rem;
+        }
+        
+        .avatar {
+            width: 1rem;
+            height: 1rem;
+            margin-right: .24rem;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+        }
+        
+        .title .name {
+            font-size: 16px;
+            color: #111111;
+        }
+        
+        .title .slogan {
+            font-size: 12px;
+            color: #666666;
+        }
+        
+        .btn-primary {
+            display: block;
+            line-height: .8rem;
+            background: #FF6633;
+            border-radius: 4px;
+            margin: 0px .3rem;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 30px;
+        }
+        
+        .txt {
+            font-size: 16px;
+            vertical-align: middle;
+        }
+        
+        .style-flex {
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -webkit-box;
+            display: box;
+            display: flex;
+        }
+        
+        .style-space-between {
+            -webkit-box-pack: justify;
+            -moz-box-pack: justify;
+            box-pack: justify;
+            -webkit-justify-content: space-between;
+            justify-content: space-between;
+        }
+        
+        .style-space-center {
+            -webkit-box-pack: center;
+            -moz-box-pack: center;
+            box-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+        }
+        
+        .style-align-item-center {
+            -webkit-box-align: center;
+            -moz-box-align: center;
+            box-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+        
+        .style-flex-1 {
+            -webkit-box-flex: 1;
+            -moz-box-flex: 1;
+            box-flex: 1;
+            -webkit-flex: 1;
+            flex: 1;
+        }
+        
+        .style-flex-3 {
+            -webkit-box-flex: 3;
+            -moz-box-flex: 3;
+            box-flex: 3;
+            -webkit-flex: 3;
+            flex: 3;
+        }
+        
+        .style-flex-2 {
+            -webkit-box-flex: 2;
+            -moz-box-flex: 2;
+            box-flex: 2;
+            -webkit-flex: 2;
+            flex: 2;
+        }
+        
+        .style-flex-shrink-0 {
+            -webkit-box-flex: 1;
+            -moz-box-flex: 1;
+            box-flex: 1;
+            -webkit-flex: none;
+            flex: none;
+        }
+        
+        .style-align-item-end {
+            -webkit-box-align: end;
+            -moz-box-align: end;
+            box-align: end;
+            -webkit-align-items: flex-end;
+            align-items: flex-end;
+        }
+        
+        .ellipsis {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+    <script type="text/javascript">
+        var deviceWidth = document.documentElement.clientWidth;
+        if (deviceWidth > 750) deviceWidth = 750;
+        document.documentElement.style.fontSize = deviceWidth / (750 / 100) + 'px';
+    </script>
+</head>
+
+<body>
+    <div class="list">
+        <div>
+            <section class="section">
+                <a>
+                    <div class="state style-flex style-align-item-center style-space-between">
+                        <span class="info waring">审核未通过</span>
+                        <span class="detail">查看原因</span>
+                    </div>
+
+                    <div class="content style-flex style-align-item-center">
+                        <div class="avatar">
+
+                        </div>
+                        <div class="title style-flex-1">
+                            <h5 class="name">英语培训中心</h5>
+                            <p class="slogan">学好英文走上人生巅峰</p>
+                        </div>
+                        <div class="arrow"></div>
+                    </div>
+                </a>
+            </section>
+            <section class="section sticky-polyfill" id="ele">
+                <a>
+                    <div class="state style-flex style-align-item-center style-space-between">
+                        <span class="info waring">审核未通过1</span>
+                        <span class="detail">查看原因</span>
+                    </div>
+
+                    <div class="content style-flex style-align-item-center">
+                        <div class="avatar">
+
+                        </div>
+                        <div class="title style-flex-1">
+                            <h5 class="name">英语培训中心</h5>
+                            <p class="slogan">学好英文走上人生巅峰</p>
+                        </div>
+                        <div class="arrow"></div>
+                    </div>
+                </a>
+            </section>
+            <section class="section">
+                <a>
+                    <div class="state style-flex style-align-item-center style-space-between">
+                        <span class="info waring">审核未通过</span>
+                        <span class="detail">查看原因</span>
+                    </div>
+
+                    <div class="content style-flex style-align-item-center">
+                        <div class="avatar">
+
+                        </div>
+                        <div class="title style-flex-1">
+                            <h5 class="name">英语培训中心</h5>
+                            <p class="slogan">学好英文走上人生巅峰</p>
+                        </div>
+                        <div class="arrow"></div>
+                    </div>
+                </a>
+            </section>
+            <section class="section sticky-polyfill">
+                <a>
+                    <div class="state style-flex style-align-item-center style-space-between">
+                        <span class="info waring">审核未通过2</span>
+                        <span class="detail">查看原因</span>
+                    </div>
+
+                    <div class="content style-flex style-align-item-center">
+                        <div class="avatar">
+
+                        </div>
+                        <div class="title style-flex-1">
+                            <h5 class="name">英语培训中心</h5>
+                            <p class="slogan">学好英文走上人生巅峰</p>
+                        </div>
+                        <div class="arrow"></div>
+                    </div>
+                </a>
+            </section>
+            <section class="section">
+                <a>
+                    <div class="state style-flex style-align-item-center style-space-between">
+                        <span class="info waring">审核未通过</span>
+                        <span class="detail">查看原因</span>
+                    </div>
+
+                    <div class="content style-flex style-align-item-center">
+                        <div class="avatar">
+
+                        </div>
+                        <div class="title style-flex-1">
+                            <h5 class="name">英语培训中心</h5>
+                            <p class="slogan">学好英文走上人生巅峰</p>
+                        </div>
+                        <div class="arrow"></div>
+                    </div>
+                </a>
+            </section>
+            <section class="section">
+                <a>
+                    <div class="state style-flex style-align-item-center style-space-between">
+                        <span class="info waring">审核未通过</span>
+                        <span class="detail">查看原因</span>
+                    </div>
+
+                    <div class="content style-flex style-align-item-center">
+                        <div class="avatar">
+
+                        </div>
+                        <div class="title style-flex-1">
+                            <h5 class="name">英语培训中心</h5>
+                            <p class="slogan">学好英文走上人生巅峰</p>
+                        </div>
+                        <div class="arrow"></div>
+                    </div>
+                </a>
+            </section>
+            <section class="section">
+                <a>
+                    <div class="state style-flex style-align-item-center style-space-between">
+                        <span class="info waring">审核未通过</span>
+                        <span class="detail">查看原因</span>
+                    </div>
+
+                    <div class="content style-flex style-align-item-center">
+                        <div class="avatar">
+
+                        </div>
+                        <div class="title style-flex-1">
+                            <h5 class="name">英语培训中心</h5>
+                            <p class="slogan">学好英文走上人生巅峰</p>
+                        </div>
+                        <div class="arrow"></div>
+                    </div>
+                </a>
+            </section>
+        </div>
+
+        <section class="section">
+            <a>
+                <div class="state style-flex style-align-item-center style-space-between">
+                    <span class="info waring">审核未通过</span>
+                    <span class="detail">查看原因</span>
+                </div>
+
+                <div class="content style-flex style-align-item-center">
+                    <div class="avatar">
+
+                    </div>
+                    <div class="title style-flex-1">
+                        <h5 class="name">英语培训中心</h5>
+                        <p class="slogan">学好英文走上人生巅峰</p>
+                    </div>
+                    <div class="arrow"></div>
+                </div>
+            </a>
+        </section>
+        <div class="">
+            <a class="btn-primary">+&nbsp;<span class="txt">新建账号2</span></a>
+        </div>
+        <div class="sticky-polyfill-bottom">
+            <a class="btn-primary">+&nbsp;<span class="txt">新建账号2</span></a>
+        </div>
+        <section class="section" id="eleBottom">
+            <a>
+                <div class="state style-flex style-align-item-center style-space-between">
+                    <span class="info waring">审核未通过</span>
+                    <span class="detail">查看原因</span>
+                </div>
+
+                <div class="content style-flex style-align-item-center">
+                    <div class="avatar">
+
+                    </div>
+                    <div class="title style-flex-1">
+                        <h5 class="name">英语培训中心</h5>
+                        <p class="slogan">学好英文走上人生巅峰</p>
+                    </div>
+                    <div class="arrow"></div>
+                </div>
+            </a>
+        </section>
+
+    </div>
+    <script type="text/javascript" src="sticky-polyfill.js"></script>
+    <script type="text/javascript">
+        /**
+         * StickyPolyFill.polyfill();
+         * 跟下面的写法是等价
+         */
+        StickyPolyFill.polyfill({
+            className: 'sticky-polyfill',
+            top: '0px',
+            bottom: '',
+            zIndex: '1'
+        });
+
+        //增加一种sticky类型
+        StickyPolyFill.polyfill({
+            className: 'sticky-polyfill-bottom',
+            top: '',
+            bottom: '0px',
+            zIndex: '1'
+        });
+    </script>
+</body>
+
+</html>
