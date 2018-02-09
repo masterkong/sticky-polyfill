@@ -54,7 +54,7 @@
              */
             //*/
             if (ModernizrTestCSSPositionSticky()) {
-                for (var i in stickyElements) {
+                for (var i = 0, length = stickyElements.length; i < length; i++) {
                     stickyElements[i].style.position = '-webkit-sticky';
                     stickyElements[i].style.position = '-moz-sticky';
                     stickyElements[i].style.position = '-o-sticky';
@@ -73,7 +73,7 @@
              */
             var stickyElementsObjectArray = [];
             function calcStickyElements(){
-                for (var i in stickyElements) {
+                for (var i = 0, length = stickyElements.length; i < length; i++) {
                     var stickyEle = stickyElements[i],
                         clientRect = stickyEle.getBoundingClientRect(),
                         computedStyle = document.defaultView.getComputedStyle(stickyEle, null);
@@ -122,7 +122,7 @@
                 if (typeof clientHeight != "number") {
                     clientHeight = document.documentElement.clientHeight;
                 }
-                for (var i in stickyElementsObjectArray) {
+                for (var i = 0, length = stickyElementsObjectArray.length; i < length; i++) {
                     stickyExe(stickyElementsObjectArray[i]);
                 }
 
