@@ -48,6 +48,16 @@ css position:sticky的兼容实现库。
     <span>sticky-bottom</span>
 </div>
 ```
+#### 4、sticky应用在bottom的情况下时需要等element生成好之后(如Vue中根据请求数据来决定element内容)，手动触发onscroll一次
+```
+//手工触发onscroll
+document.documentElement.scrollTop = 1; //chrome
+document.body.scrollTop = 1; //safari
+
+//还原
+document.documentElement.scrollTop = 0; //chrome
+document.body.scrollTop = 0; //safari
+```
 
 ## 参考文献
 [MDN-position](https://developer.mozilla.org/en-US/docs/Web/CSS/position)  

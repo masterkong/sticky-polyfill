@@ -1,5 +1,5 @@
 /*!
- * sticky-polyfill.js v1.0.0
+ * sticky-polyfill.js v2.1.0
  * (c) 2017-2017 masterkong
  * Github: https://github.com/masterkong/sticky-polyfill.git
  * Released under the MIT License.
@@ -72,41 +72,49 @@
              * sticky-polyfill
              */
             var stickyElementsObjectArray = [];
-            for (var i in stickyElements) {
-                var stickyEle = stickyElements[i],
-                    clientRect = stickyEle.getBoundingClientRect(),
-                    computedStyle = document.defaultView.getComputedStyle(stickyEle, null);
-                /**
-                 * 使用opacity在元素上生成一个新的z-index层叠上下文
-                 */
-                stickyEle.style.opacity = computedStyle.opacity || '1';
-                stickyEle.style.zIndex = parseInt(computedStyle.zIndex) || config.zIndex; //z-index默认值为auto
-
-                /**
-                 * placeholderEle作为元素的替身有两个作用:
-                 * 1、在position变为fixed时，保证下方的元素不会有突然向上跳的感觉
-                 * 2、在滚动时正确计算元素何时恢复原来的position
-                 * 参考:https://www.sitepoint.com/css-position-sticky-introduction-polyfills/
-                 */
-                var placeholderEle = document.createElement('div');
-                placeholderEle.style.width = clientRect.width + 'px';
-                placeholderEle.style.height = clientRect.height + 'px';
-                placeholderEle.style.margin = computedStyle.margin;
-
-                stickyElementsObjectArray.push({
-                    stickyEle: stickyEle,
-                    config: config,
-                    cssText: stickyEle.style.cssText,
-                    clientRect: clientRect,
-                    placeholderEle: placeholderEle,
-                    isPlaceholderEleAdded: false
-                });
+            function calcStickyElements(){
+                for (var i in stickyElements) {
+                    var stickyEle = stickyElements[i],
+                        clientRect = stickyEle.getBoundingClientRect(),
+                        computedStyle = document.defaultView.getComputedStyle(stickyEle, null);
+                    /**
+                     * 使用opacity在元素上生成一个新的z-index层叠上下文
+                     */
+                    stickyEle.style.opacity = computedStyle.opacity || '1';
+                    stickyEle.style.zIndex = parseInt(computedStyle.zIndex) || config.zIndex; //z-index默认值为auto
+    
+                    /**
+                     * placeholderEle作为元素的替身有两个作用:
+                     * 1、在position变为fixed时，保证下方的元素不会有突然向上跳的感觉
+                     * 2、在滚动时正确计算元素何时恢复原来的position
+                     * 参考:https://www.sitepoint.com/css-position-sticky-introduction-polyfills/
+                     */
+                    var placeholderEle = document.createElement('div');
+                    placeholderEle.style.width = clientRect.width + 'px';
+                    placeholderEle.style.height = clientRect.height + 'px';
+                    placeholderEle.style.margin = computedStyle.margin;
+    
+                    stickyElementsObjectArray.push({
+                        stickyEle: stickyEle,
+                        config: config,
+                        cssText: stickyEle.style.cssText,
+                        clientRect: clientRect,
+                        placeholderEle: placeholderEle,
+                        isPlaceholderEleAdded: false
+                    });
+                }
             }
 
-            OnScroll(); //先运行一次，保证以bottom确定sticky的时候正常
+            //OnScroll(); //先运行一次，保证以bottom确定sticky的时候正常
             window.addEventListener('scroll', OnScroll);
 
             function OnScroll() {
+                /**
+                 * sticky-polyfill元素有可能在"DOMContentLoaded"发生时还未生成好，比如在Vue等框架使用时
+                 */
+                if(stickyElementsObjectArray.length==0){
+                    calcStickyElements();
+                }
                 /**
                  * 在Safari中测试发现clientHeight会有变化，改为实时获取clientHeight
                  */
