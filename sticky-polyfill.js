@@ -30,7 +30,7 @@
             }
             config.zIndex = option.zIndex || config.zIndex;
         }
-        console.log(config);
+        console.log('sticky-polyfill:CSS_config',config);
         /**
          * 参考:https://modernizr.com/download?csspositionsticky-dontmin-setclasses&q=sticky
          */
@@ -46,9 +46,10 @@
             return mStyle.position.indexOf(value) !== -1;
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
+        window.addEventListener('load', function() {
             var className = config.className;
             var stickyElements = Array.prototype.slice.call(document.getElementsByClassName(className));
+            console.log('sticky-polyfill:Event_load:stickyElements',stickyElements)
             /**
              * sticky-native
              */
