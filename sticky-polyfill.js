@@ -16,7 +16,7 @@
             className: 'sticky-polyfill',
             top: '0px',
             bottom: '',
-            zIndex: '1'
+            zIndex: '99'
         };
 
         if (option) {
@@ -46,34 +46,39 @@
             return mStyle.position.indexOf(value) !== -1;
         }
 
-        window.addEventListener('load', function() {
-            var className = config.className;
-            var stickyElements = Array.prototype.slice.call(document.getElementsByClassName(className));
-            console.log('sticky-polyfill:Event_load:stickyElements',stickyElements)
-            /**
-             * sticky-native
-             */
-            //*/
-            if (ModernizrTestCSSPositionSticky()) {
-                for (var i = 0, length = stickyElements.length; i < length; i++) {
-                    stickyElements[i].style.position = '-webkit-sticky';
-                    stickyElements[i].style.position = '-moz-sticky';
-                    stickyElements[i].style.position = '-o-sticky';
-                    stickyElements[i].style.position = '-ms-sticky';
-                    stickyElements[i].style.position = 'sticky';
-                    stickyElements[i].style.top = config.top;
-                    stickyElements[i].style.bottom = config.bottom;
-                    stickyElements[i].style.zIndex = config.zIndex;
-                }
-                return;
-            }
-            //*/
-
+        document.addEventListener('DOMContentLoaded', function() {
             /**
              * sticky-polyfill
              */
-            var stickyElementsObjectArray = [];
+            var stickyElementsObjectArray = [],isStickyNative = false;
+            
             function calcStickyElements(){
+                var className = config.className;
+                var stickyElements = Array.prototype.slice.call(document.getElementsByClassName(className));
+                console.log('sticky-polyfill:Event_scroll:stickyElements',stickyElements);
+                if(stickyElements.length == 0){
+                    console.error("sticky-polyfill:No Element Found")
+                    return;
+                }
+                /**
+                 * sticky-native
+                 */
+                //*/
+                if (ModernizrTestCSSPositionSticky()) {
+                    for (var i = 0, length = stickyElements.length; i < length; i++) {
+                        stickyElements[i].style.position = '-webkit-sticky';
+                        stickyElements[i].style.position = '-moz-sticky';
+                        stickyElements[i].style.position = '-o-sticky';
+                        stickyElements[i].style.position = '-ms-sticky';
+                        stickyElements[i].style.position = 'sticky';
+                        stickyElements[i].style.top = config.top;
+                        stickyElements[i].style.bottom = config.bottom;
+                        stickyElements[i].style.zIndex = config.zIndex;
+                    }
+                    isStickyNative = true;
+                    return;
+                }
+                //*/
                 for (var i = 0, length = stickyElements.length; i < length; i++) {
                     var stickyEle = stickyElements[i],
                         clientRect = stickyEle.getBoundingClientRect(),
@@ -110,6 +115,9 @@
             window.addEventListener('scroll', OnScroll);
 
             function OnScroll() {
+                if(isStickyNative){
+                    return;
+                }
                 /**
                  * sticky-polyfill元素有可能在"DOMContentLoaded"发生时还未生成好，比如在Vue等框架使用时
                  */
