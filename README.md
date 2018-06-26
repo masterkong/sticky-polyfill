@@ -15,16 +15,17 @@ css position:sticky的兼容实现库。
 
 ```
 <script type="text/javascript">
+
+     StickyPolyFill.polyfill();
     /**
-     * StickyPolyFill.polyfill();
-     * 跟下面的写法是等价
-     */
-    StickyPolyFill.polyfill({
-        className: 'sticky-polyfill',
-        top: '0px',
-        bottom: '',
-        zIndex: '1'
-    });
+     * //跟上面的写法是等价的，也就是默认配置
+     * StickyPolyFill.polyfill({
+     *    className: 'sticky-polyfill',
+     *    top: '0px',
+     *    bottom: '',
+     *    zIndex: '99'
+     * });
+    */
 
     /**
      * 可以多次配置自定义参数来增加sticky类型
